@@ -40,4 +40,13 @@ func metaDataInit() {
 		logs.Info(map[string]any{"Namespace": config.MetadataNamespace, "inCluster版本": inClusterInfo.GitVersion}, "元数据命名空间已存在")
 	}
 
+	// 初始化ClusterKubeconfig
+	config.ClusterKubeconfig = make(map[string]string)
+	// 查询当前已经存在的集群配置
+	secretList, _ := config.InClusterClientSet.CoreV1().Secrets(config.MetadataNamespace).List(context.TODO(), metav1.ListOptions{LabelSelector: config.ClusterConfigSecretLabelKey + "=" + config.ClusterConfigSecretLabelValue})
+	for _, v := range secretList.Items {
+		config.ClusterKubeconfig[v.Name] = string(v.Data["kubeconfig"])
+	}
+	
+
 }

@@ -26,6 +26,7 @@ func Delete(r *gin.Context) {
 		logs.Warning(map[string]any{"clusterId": clusterId}, "集群删除成功")
 		returnData.Status = 200
 		returnData.Message = "删除成功"
+		delete(config.ClusterKubeconfig, clusterId)
 	}
 	r.JSON(200, returnData)
 }

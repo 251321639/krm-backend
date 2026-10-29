@@ -32,10 +32,12 @@ var (
 	// ClusterKubeconfig   map[string]string
 	RunAsMode           string
 	ForbidNamespaceList []string
+	ClusterKubeconfig   map[string]string
 
 	InCluster string
 )
-var ClusterKubeconfig = make(map[string]string)
+
+// var ClusterKubeconfig = make(map[string]string)
 
 type ReturnData struct {
 	Status  int            `json:"status"`
