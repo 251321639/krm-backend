@@ -8,6 +8,7 @@ import (
 	"strconv"
 
 	// "github.com/dotbalo/kubeutils/kubeutils"
+	"github.com/dotbalo/kubeutils/kubeutils"
 	"github.com/gin-gonic/gin"
 	corev1 "k8s.io/api/core/v1"
 	"k8s.io/client-go/kubernetes"
@@ -117,89 +118,89 @@ func CreateServiceByController(containers []corev1.Container, labels map[string]
 	// return
 }
 
-// func (c *Info) Create(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
-// 	err := kubeUtilsInterface.Create(c.Namespace)
-// 	if err != nil {
-// 		msg := "创建失败" + err.Error()
-// 		c.ReturnData.Message = msg
-// 		c.ReturnData.Status = 400
-// 		logs.Error(nil, msg)
-// 	}
-// 	r.JSON(200, c.ReturnData)
-// }
+func (c *Info) Create(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
+	err := kubeUtilsInterface.Create(c.Namespace)
+	if err != nil {
+		msg := "创建失败" + err.Error()
+		c.ReturnData.Message = msg
+		c.ReturnData.Status = 400
+		logs.Error(nil, msg)
+	}
+	r.JSON(200, c.ReturnData)
+}
 
-// func (c *Info) Update(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
-// 	err := kubeUtilsInterface.Update(c.Namespace)
-// 	if err != nil {
-// 		msg := "更新失败" + err.Error()
-// 		c.ReturnData.Message = msg
-// 		c.ReturnData.Status = 400
-// 		logs.Error(nil, msg)
-// 	}
-// 	r.JSON(200, c.ReturnData)
-// }
+func (c *Info) Update(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
+	err := kubeUtilsInterface.Update(c.Namespace)
+	if err != nil {
+		msg := "更新失败" + err.Error()
+		c.ReturnData.Message = msg
+		c.ReturnData.Status = 400
+		logs.Error(nil, msg)
+	}
+	r.JSON(200, c.ReturnData)
+}
 
-// func (c *Info) List(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
-// 	items, err := kubeUtilsInterface.List(c.Namespace, c.LabelSelector, c.FieldSelector)
-// 	if err != nil {
-// 		msg := "查询失败" + err.Error()
-// 		c.ReturnData.Message = msg
-// 		c.ReturnData.Status = 400
-// 		logs.Error(nil, msg)
-// 	} else {
-// 		c.ReturnData.Data = make(map[string]interface{})
-// 		c.ReturnData.Data["items"] = items
-// 	}
-// 	r.JSON(200, c.ReturnData)
-// }
+func (c *Info) List(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
+	items, err := kubeUtilsInterface.List(c.Namespace, c.LabelSelector, c.FieldSelector)
+	if err != nil {
+		msg := "查询失败" + err.Error()
+		c.ReturnData.Message = msg
+		c.ReturnData.Status = 400
+		logs.Error(nil, msg)
+	} else {
+		c.ReturnData.Data = make(map[string]interface{})
+		c.ReturnData.Data["items"] = items
+	}
+	r.JSON(200, c.ReturnData)
+}
 
-// func (c *Info) Get(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
-// 	item, err := kubeUtilsInterface.Get(c.Namespace, c.Name)
-// 	if err != nil {
-// 		msg := "查询失败" + err.Error()
-// 		c.ReturnData.Message = msg
-// 		c.ReturnData.Status = 400
-// 		logs.Error(nil, msg)
-// 	} else {
-// 		c.ReturnData.Data = make(map[string]interface{})
-// 		c.ReturnData.Data["item"] = item
-// 	}
-// 	r.JSON(200, c.ReturnData)
-// }
+func (c *Info) Get(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
+	item, err := kubeUtilsInterface.Get(c.Namespace, c.Name)
+	if err != nil {
+		msg := "查询失败" + err.Error()
+		c.ReturnData.Message = msg
+		c.ReturnData.Status = 400
+		logs.Error(nil, msg)
+	} else {
+		c.ReturnData.Data = make(map[string]interface{})
+		c.ReturnData.Data["item"] = item
+	}
+	r.JSON(200, c.ReturnData)
+}
 
-// func (c *Info) Delete(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
-// 	var gracePeriodSeconds int64
-// 	if c.Force {
-// 		//强制删除
-// 		var s int64 = 0
-// 		gracePeriodSeconds = s
-// 	}
-// 	err := kubeUtilsInterface.Delete(c.Namespace, c.Name, &gracePeriodSeconds)
-// 	if err != nil {
-// 		msg := "删除失败" + err.Error()
-// 		c.ReturnData.Message = msg
-// 		c.ReturnData.Status = 400
-// 		logs.Error(nil, msg)
-// 	}
-// 	r.JSON(200, c.ReturnData)
-// }
+func (c *Info) Delete(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
+	var gracePeriodSeconds int64
+	if c.Force {
+		//强制删除
+		var s int64 = 0
+		gracePeriodSeconds = s
+	}
+	err := kubeUtilsInterface.Delete(c.Namespace, c.Name, &gracePeriodSeconds)
+	if err != nil {
+		msg := "删除失败" + err.Error()
+		c.ReturnData.Message = msg
+		c.ReturnData.Status = 400
+		logs.Error(nil, msg)
+	}
+	r.JSON(200, c.ReturnData)
+}
 
-// func (c *Info) DeleteList(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
-// 	var gracePeriodSeconds int64
-// 	if c.Force {
-// 		//强制删除
-// 		var s int64 = 0
-// 		gracePeriodSeconds = s
-// 	}
-// 	err := kubeUtilsInterface.DeleteList(c.Namespace, c.BasicInfo.DeleteList, &gracePeriodSeconds)
-// 	if err != nil {
-// 		msg := "删除失败" + err.Error()
-// 		c.ReturnData.Message = msg
-// 		c.ReturnData.Status = 400
-// 		logs.Error(nil, msg)
-// 	}
-// 	r.JSON(200, c.ReturnData)
-// }
+func (c *Info) DeleteList(r *gin.Context, kubeUtilsInterface kubeutils.KubeUtilser) {
+	var gracePeriodSeconds int64
+	if c.Force {
+		//强制删除
+		var s int64 = 0
+		gracePeriodSeconds = s
+	}
+	err := kubeUtilsInterface.DeleteList(c.Namespace, c.BasicInfo.DeleteList, &gracePeriodSeconds)
+	if err != nil {
+		msg := "删除失败" + err.Error()
+		c.ReturnData.Message = msg
+		c.ReturnData.Status = 400
+		logs.Error(nil, msg)
+	}
+	r.JSON(200, c.ReturnData)
+}
 
 func BasicInit(r *gin.Context, item interface{}) (clientset *kubernetes.Clientset, basicInfo BasicInfo, err error) {
 	basicInfo = BasicInfo{}
