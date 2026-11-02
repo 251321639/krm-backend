@@ -3,6 +3,7 @@ package routers
 import (
 	"krm-backend/routers/auth"
 	"krm-backend/routers/cluster"
+	"krm-backend/routers/deployment"
 	"krm-backend/routers/namespace"
 	"krm-backend/routers/pod"
 
@@ -15,4 +16,5 @@ func RegisterRoutes(r *gin.Engine) {
 	cluster.RegisterSubRoutes(apiGroup)
 	namespace.RegisterSubRoutes(apiGroup)
 	pod.RegisterSubRouter(apiGroup)
+	deployment.RegisterSubRouter(apiGroup)
 }

@@ -25,13 +25,14 @@ func get(podGroup *gin.RouterGroup) {
 func list(podGroup *gin.RouterGroup) {
 	podGroup.GET("/list", pod.List)
 }
-func logs(podGroup *gin.RouterGroup) {
-	podGroup.GET("/logs", pod.Logs)
-}
 
-func exec(podGroup *gin.RouterGroup) {
-	podGroup.GET("/exec", pod.Exec)
-}
+// func logs(podGroup *gin.RouterGroup) {
+// 	podGroup.GET("/logs", pod.Logs)
+// }
+
+//	func exec(podGroup *gin.RouterGroup) {
+//		podGroup.GET("/exec", pod.Exec)
+//	}
 func RegisterSubRouter(g *gin.RouterGroup) {
 	podGroup := g.Group("/pod")
 	add(podGroup)
@@ -40,6 +41,6 @@ func RegisterSubRouter(g *gin.RouterGroup) {
 	get(podGroup)
 	list(podGroup)
 	deleteList(podGroup)
-	logs(podGroup)
-	exec(podGroup)
+	// logs(podGroup)
+	// exec(podGroup)
 }

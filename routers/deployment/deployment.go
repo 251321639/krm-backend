@@ -22,9 +22,10 @@ func deleteList(deploymentGroup *gin.RouterGroup) {
 func get(deploymentGroup *gin.RouterGroup) {
 	deploymentGroup.GET("/get", deployment.Get)
 }
-func restart(deploymentGroup *gin.RouterGroup) {
-	deploymentGroup.GET("/restart", deployment.Restart)
-}
+
+//	func restart(deploymentGroup *gin.RouterGroup) {
+//		deploymentGroup.GET("/restart", deployment.Restart)
+//	}
 func list(deploymentGroup *gin.RouterGroup) {
 	deploymentGroup.GET("/list", deployment.List)
 }
@@ -37,5 +38,5 @@ func RegisterSubRouter(g *gin.RouterGroup) {
 	get(deploymentGroup)
 	list(deploymentGroup)
 	deleteList(deploymentGroup)
-	restart(deploymentGroup)
+	// restart(deploymentGroup)
 }
